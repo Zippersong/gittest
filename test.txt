@@ -1,86 +1,68 @@
-°Ù¶ÈÊ×Ò³ÉèÖÃµÇÂ¼
-µ½°Ù¶ÈÊ×Ò³
-ÔÚÏßipynb
-ÍøÒ³×ÊÑ¶ÊÓÆµÍ¼Æ¬ÖªµÀÎÄ¿âÌù°ÉµØÍ¼²É¹º¸ü¶à
-°Ù¶ÈÈÈ°ñ ¤s»»Ò»»»
-1 31Ê¡ÇøÊÐÐÂÔöÈ·Õï11Àý ±¾ÍÁ1Àý  ÈÈ 490Íò
-2 Ó¢Ã½Íý³ÆÖÐ¹ú¼äµý±»ÇýÖð Ê¹¹Ý²µ³â 473Íò
-3 Ç°Å®¼ÇÕß×ÔÊöÔâ¼Ò±© ÕÉ·ò:Ã»ÓÐµÄÊÂ 457Íò
-4 Íøºì¿ÚÕÖ¿ÅÁ£¹ýÂËÐÔÄÜ½ö16.5% 441Íò
-5 ÒÔÉ«Ä±È¨µÄ80ºóÅ®¸É²¿ÂäÂí 425Íò
-6 °ÝµÇ·¢²¼Ê×¸ö"Â¯±ßÌ¸»°"ÊÓÆµ 410Íò
-7 ÍæºÏ³É´óÎ÷¹ÏÒ»´Î±»Æ­19.9Ôª 396Íò
-8 ÀÖÊÓ»ØÓ¦AppÍ¼±êÕùÒé:²»Ó°ÏìÊ¹ÓÃ 382Íò
-9 ²¶Óã´¬²à·­ÖÂ11ËÀ:Ò»¼Ò3ÐÖµÜÉ¥Ãü 369Íò
-10 ¶·ÂÞ´óÂ½Æ¬Í·ÖÆ×÷¹«Ë¾³ÐÈÏ³­Ï® 356Íò
-11 Ó¡¶ÈÅ©ÃñÔÚÈ«¹ú·¢Æð¶ÂÂ·ÔË¶¯  ÐÂ 343Íò
-12 ºú¸èÓëÁõÒà·Æ½á»éÁË?ºú¸è·½±ÙÒ¥ 331Íò
-13 ÌØÀÊÆÕÇ°¹ËÎÊ¶Ø´ÙÆäÔÙ´Î¾ºÑ¡×ÜÍ³ 320Íò
-14 Ð­ºÍµÈÖªÃûÒ½Ôº×ÖºÅ²»µÃÉÃ×ÔÊ¹ÓÃ 308Íò
-15 ÄÐ×ÓÌøÂ¥×ÔÉ±ÔÒÖÐÂ·±ßÓ¤¶ù³µ 298Íò
-ÊÕÆð¹¤¾ßÊ±¼ä²»ÏÞËùÓÐÍøÒ³ºÍÎÄ¼þÕ¾µãÄÚ¼ìË÷
-ËÑË÷¹¤¾ß°Ù¶ÈÎªÄúÕÒµ½Ïà¹Ø½á¹ûÔ¼1,590,000¸ö
-ÈçºÎÓÃä¯ÀÀÆ÷ÔÚÏß²é¿´.ipynbÎÄ¼þ - ±à³Ì½³ÐÄÕß - ²©¿ÍÔ°
 
-2019Äê1ÔÂ21ÈÕ µ±ÎÒÃÇÓÃjupyter notebook±à¼­ºÃ.ipynbÎÄ¼þºó,¿Ï¶¨»áÏë²»ÓÃÔËÐÐjupyter notebookÒ²ÄÜ·½±ãµÃ²é¿´.ipynbµÄÎÄ¼þ,Èç¹ûÖ±½Ó´ò¿ª.ipynbµÄÎÄ¼þ,ÎÒÃÇ»á·¢ÏÖÕâÊÇÒ»ÖÖÀàËÆ...
-²©¿ÍÔ°
-¤†
-°Ù¶È¿ìÕÕ
-¤bÎªÄúÍÆ¼ö£º°²×¿ÊÖ»ú²é¿´ipynbÎÄ¼þipynbÎÄ¼þÔÚÏß´ò¿ªpythonÔõÃ´´ò¿ªipynbÎÄ¼þ
-ÔÚÏßipynb²é¿´ipynbÓÃÊÖ»úÔõÃ´²é¿´ipynbÎÄ¼þipynbÔÚÏß×ª»»
-ÈçºÎÓÃä¯ÀÀÆ÷ÔÚÏß²é¿´.ipynbÎÄ¼þ_weixin_33775582µÄ²©¿Í-C...
-2019Äê1ÔÂ21ÈÕ µ±ÎÒÃÇÓÃjupyter notebook±à¼­ºÃ.ipynbÎÄ¼þºó,¿Ï¶¨»áÏë²»ÓÃÔËÐÐjupyter notebookÒ²ÄÜ·½±ãµÃ²é¿´.ipynbµÄÎÄ¼þ,Èç¹ûÖ±½Ó´ò¿ª.ipynbµÄÎÄ¼þ,ÎÒÃÇ»á·¢ÏÖÕâ...
-CSDN¼¼ÊõÉçÇø
-¤†
-°Ù¶È¿ìÕÕ
-ÈçºÎÓÃä¯ÀÀÆ÷ÔÚÏß²é¿´.ipynbÎÄ¼þ_weixin_33904756µÄ²©..._...
-2019Äê1ÔÂ21ÈÕ µ±ÎÒÃÇÓÃjupyter notebook±à¼­ºÃ.ipynbÎÄ¼þºó,¿Ï¶¨»áÏë²»ÓÃÔËÐÐjupyter notebookÒ²ÄÜ·½±ãµÃ²é¿´.ipynbµÄÎÄ¼þ,Èç¹ûÖ±½Ó´ò¿ª.ipynbµÄÎÄ¼þ,ÎÒÃÇ»á·¢ÏÖÕâ...
-CSDN¼¼ÊõÉçÇø
-¤†
-°Ù¶È¿ìÕÕ
-Ì½Ë÷.ipynb | ´ó×¨À¸
-2020Äê3ÔÂ1ÈÕ .ipynbÈ«³Æ½Ðipython notebook,ÔÚä¯ÀÀÆ÷ÏÂ´ò¿ª,¿ÉÒÔÔÚÏß±à¼­¡¢ÔÚÏßÔËÐÐ¡£ »ù´¡¸ÅÄî ÐèÒª°²×°jupyter¿â 1 pip3 install jupyter Jupyter NotebookÊÇÒ»...
+15 ç”·å­è·³æ¥¼è‡ªæ€ç ¸ä¸­è·¯è¾¹å©´å„¿è½¦ 298ä¸‡
+æ”¶èµ·å·¥å…·æ—¶é—´ä¸é™æ‰€æœ‰ç½‘é¡µå’Œæ–‡ä»¶ç«™ç‚¹å†…æ£€ç´¢
+æœç´¢å·¥å…·ç™¾åº¦ä¸ºæ‚¨æ‰¾åˆ°ç›¸å…³ç»“æžœçº¦1,590,000ä¸ª
+å¦‚ä½•ç”¨æµè§ˆå™¨åœ¨çº¿æŸ¥çœ‹.ipynbæ–‡ä»¶ - ç¼–ç¨‹åŒ å¿ƒè€… - åšå®¢å›­
+
+2019å¹´1æœˆ21æ—¥ å½“æˆ‘ä»¬ç”¨jupyter notebookç¼–è¾‘å¥½.ipynbæ–‡ä»¶åŽ,è‚¯å®šä¼šæƒ³ä¸ç”¨è¿è¡Œjupyter notebookä¹Ÿèƒ½æ–¹ä¾¿å¾—æŸ¥çœ‹.ipynbçš„æ–‡ä»¶,å¦‚æžœç›´æŽ¥æ‰“å¼€.ipynbçš„æ–‡ä»¶,æˆ‘ä»¬ä¼šå‘çŽ°è¿™æ˜¯ä¸€ç§ç±»ä¼¼...
+åšå®¢å›­
+î˜«
+ç™¾åº¦å¿«ç…§
+î˜ˆä¸ºæ‚¨æŽ¨èï¼šå®‰å“æ‰‹æœºæŸ¥çœ‹ipynbæ–‡ä»¶ipynbæ–‡ä»¶åœ¨çº¿æ‰“å¼€pythonæ€Žä¹ˆæ‰“å¼€ipynbæ–‡ä»¶
+åœ¨çº¿ipynbæŸ¥çœ‹ipynbç”¨æ‰‹æœºæ€Žä¹ˆæŸ¥çœ‹ipynbæ–‡ä»¶ipynbåœ¨çº¿è½¬æ¢
+å¦‚ä½•ç”¨æµè§ˆå™¨åœ¨çº¿æŸ¥çœ‹.ipynbæ–‡ä»¶_weixin_33775582çš„åšå®¢-C...
+2019å¹´1æœˆ21æ—¥ å½“æˆ‘ä»¬ç”¨jupyter notebookç¼–è¾‘å¥½.ipynbæ–‡ä»¶åŽ,è‚¯å®šä¼šæƒ³ä¸ç”¨è¿è¡Œjupyter notebookä¹Ÿèƒ½æ–¹ä¾¿å¾—æŸ¥çœ‹.ipynbçš„æ–‡ä»¶,å¦‚æžœç›´æŽ¥æ‰“å¼€.ipynbçš„æ–‡ä»¶,æˆ‘ä»¬ä¼šå‘çŽ°è¿™...
+CSDNæŠ€æœ¯ç¤¾åŒº
+î˜«
+ç™¾åº¦å¿«ç…§
+å¦‚ä½•ç”¨æµè§ˆå™¨åœ¨çº¿æŸ¥çœ‹.ipynbæ–‡ä»¶_weixin_33904756çš„åš..._...
+2019å¹´1æœˆ21æ—¥ å½“æˆ‘ä»¬ç”¨jupyter notebookç¼–è¾‘å¥½.ipynbæ–‡ä»¶åŽ,è‚¯å®šä¼šæƒ³ä¸ç”¨è¿è¡Œjupyter notebookä¹Ÿèƒ½æ–¹ä¾¿å¾—æŸ¥çœ‹.ipynbçš„æ–‡ä»¶,å¦‚æžœç›´æŽ¥æ‰“å¼€.ipynbçš„æ–‡ä»¶,æˆ‘ä»¬ä¼šå‘çŽ°è¿™...
+CSDNæŠ€æœ¯ç¤¾åŒº
+î˜«
+ç™¾åº¦å¿«ç…§
+æŽ¢ç´¢.ipynb | å¤§ä¸“æ 
+2020å¹´3æœˆ1æ—¥ .ipynbå…¨ç§°å«ipython notebook,åœ¨æµè§ˆå™¨ä¸‹æ‰“å¼€,å¯ä»¥åœ¨çº¿ç¼–è¾‘ã€åœ¨çº¿è¿è¡Œã€‚ åŸºç¡€æ¦‚å¿µ éœ€è¦å®‰è£…jupyteråº“ 1 pip3 install jupyter Jupyter Notebookæ˜¯ä¸€...
 www.dazhuanlan.com/2020/03/01/...
-¤†
-°Ù¶È¿ìÕÕ
-ÆäËûÈË»¹ÔÚËÑ
-jupyter´ò¿ªipynbipynbÎÄ¼þÊÇÊ²Ã´¶«Î÷ÈçºÎ´ò¿ªipynbÎÄ¼þipynbÎÄ¼þÊÇ¸ÉÊ²Ã´µÄnbviewerÔõÃ´°ÑipynbÎÄ¼þµ¼³öµ½×ÀÃæpycharmÔËÐÐipynb²é¿´ipynb
-´ò¿ª.ipynbÎÄ¼þ(jupyter)
+î˜«
+ç™¾åº¦å¿«ç…§
+å…¶ä»–äººè¿˜åœ¨æœ
+jupyteræ‰“å¼€ipynbipynbæ–‡ä»¶æ˜¯ä»€ä¹ˆä¸œè¥¿å¦‚ä½•æ‰“å¼€ipynbæ–‡ä»¶ipynbæ–‡ä»¶æ˜¯å¹²ä»€ä¹ˆçš„nbvieweræ€Žä¹ˆæŠŠipynbæ–‡ä»¶å¯¼å‡ºåˆ°æ¡Œé¢pycharmè¿è¡ŒipynbæŸ¥çœ‹ipynb
+æ‰“å¼€.ipynbæ–‡ä»¶(jupyter)
 
-2020Äê9ÔÂ10ÈÕ ÔÚÆäºóÌø³öÀ´µÄÍøÖ·ÖÐÑ¡ÔñÒ»¸ö´ò¿ª,¾Í¿ÉÒÔÊ¹ÓÃjupyter labÁË(ÆäÊµ²»ÊÇÔÚÏß) ´ò¿ª.ipynbÎÄ¼þ(jupyter) ±êÇ©:micbookinfoµçÄÔÍøÖ·´ò¿ªÁîÐÐcodeÊ¹ÓÃ ...
+2020å¹´9æœˆ10æ—¥ åœ¨å…¶åŽè·³å‡ºæ¥çš„ç½‘å€ä¸­é€‰æ‹©ä¸€ä¸ªæ‰“å¼€,å°±å¯ä»¥ä½¿ç”¨jupyter labäº†(å…¶å®žä¸æ˜¯åœ¨çº¿) æ‰“å¼€.ipynbæ–‡ä»¶(jupyter) æ ‡ç­¾:micbookinfoç”µè„‘ç½‘å€æ‰“å¼€ä»¤è¡Œcodeä½¿ç”¨ ...
 www.mamicode.com/info-detail-3...
-¤†
-°Ù¶È¿ìÕÕ
-IPYNB ÎÄ¼þ - ÈçºÎ´ò¿ª»ò×ª»» IPYNB ÎÄ¼þ
-ÄÄÀï¿ÉÒÔÕÒµ½ .ipynb ¸ñÊ½µÄÃèÊö? Ê²Ã´ÑùµÄÓ¦ÓÃ³ÌÐò¿ÉÒÔÓÉ .ipynb µÄÎÄ¼þ×ª»»ÎªÆäËû²»Í¬¸ñÊ½? ÄÄ¸öMIMEÀàÐÍÊÇÓë .ipynb ÑÓÉìÏà¹ØÁªµÄ?...
+î˜«
+ç™¾åº¦å¿«ç…§
+IPYNB æ–‡ä»¶ - å¦‚ä½•æ‰“å¼€æˆ–è½¬æ¢ IPYNB æ–‡ä»¶
+å“ªé‡Œå¯ä»¥æ‰¾åˆ° .ipynb æ ¼å¼çš„æè¿°? ä»€ä¹ˆæ ·çš„åº”ç”¨ç¨‹åºå¯ä»¥ç”± .ipynb çš„æ–‡ä»¶è½¬æ¢ä¸ºå…¶ä»–ä¸åŒæ ¼å¼? å“ªä¸ªMIMEç±»åž‹æ˜¯ä¸Ž .ipynb å»¶ä¼¸ç›¸å…³è”çš„?...
 www.filedesc.com/zh/file/ipynb
-¤†
-°Ù¶È¿ìÕÕ
-ÉèÖÃË«»÷Ö±½Ó´ò¿ª.ipynbÎÄ¼þ - ¼òÊé
+î˜«
+ç™¾åº¦å¿«ç…§
+è®¾ç½®åŒå‡»ç›´æŽ¥æ‰“å¼€.ipynbæ–‡ä»¶ - ç®€ä¹¦
 
-2017Äê9ÔÂ3ÈÕ ±³¾°:jupyter notebook´ò¿ªºóÎÞ·¨¸ü¸ÄÂ·¾¶,Ö»ÄÜÔÚÄ¬ÈÏÂ·¾¶ÏÂuploadÎÄ¼þ(Èç.ipynb .txt .csv ¡¤¡¤¡¤)ºó,²ÅÄÜ´ò¿ª²¢²é¿´ÎÄ¼þÖÐµÄ¾ßÌåÄÚÈÝ¡£ÈçºÎ¿ì½Ý¸ßÐ§µØ´ò¿ªÈÎÒâ...
-¼òÊéÉçÇø
-¤†
-°Ù¶È¿ìÕÕ
-IpynbÎÄ¼þµÄ´ò¿ª - ÔÆ+ÉçÇø - ÌÚÑ¶ÔÆ
-2018Äê1ÔÂ2ÈÕ RT,ipynbÎÄ¼þÓÃgeditÖ±½Ó´ò¿ªµÄ»°,Ì«¶à¸½¼ÓÐÅÏ¢,´ËÊ±ÐèÒªÔÚä¯ÀÀÆ÷¶Ë´ò¿ª Éý¼¶ipython Ì«µÍ°æ±¾µÄipythonÊÇ²»ÐÐµÄ,³öÏÖµÄ´íÎó¿ÉÄÜÊÇÕâÑùµÄ: ...
-ÌÚÑ¶ÔÆ¼ÆËã
-¤†
-°Ù¶È¿ìÕÕ
-´ò¿ª.ipynbÎÄ¼þ(jupyter) - ¹Å³Ç¶Àµö - ²©¿ÍÔ°
-2020Äê8ÔÂ29ÈÕ Ê×ÏÈÒªÈ·±£µçÄÔÉÏÒÑ¾­°²×°jupyter notebook Ê¹ÓÃwin+Rµ÷³öÔËÐÐ,ÔÚÆäÖÐÊäÈëcmd´ò¿ªÃüÁîÐÐ È»ºóÔÚÃüÁîÐÐÖÐÊäÈëjupyter notebook ÔÚÆäºóÌø³öÀ´µÄÍøÖ·ÖÐÑ¡...
-²©¿ÍÔ°
-¤†
-°Ù¶È¿ìÕÕ
-ipynb_ipynbÏà¹ØÔÆ¼ÆËãÄÚÈÝ - UCloudÔÆÉçÇø
-UCloudÖÐÁ¢ÔÆ¼ÆËãÎªÄú½éÉÜipynb,UCloudÔÆÉçÇøÎªÄúÌá¹©ÓëipynbÏà¹ØµÄÔÆ¼ÆËãÎÄÕÂ¡£
+2017å¹´9æœˆ3æ—¥ èƒŒæ™¯:jupyter notebookæ‰“å¼€åŽæ— æ³•æ›´æ”¹è·¯å¾„,åªèƒ½åœ¨é»˜è®¤è·¯å¾„ä¸‹uploadæ–‡ä»¶(å¦‚.ipynb .txt .csv Â·Â·Â·)åŽ,æ‰èƒ½æ‰“å¼€å¹¶æŸ¥çœ‹æ–‡ä»¶ä¸­çš„å…·ä½“å†…å®¹ã€‚å¦‚ä½•å¿«æ·é«˜æ•ˆåœ°æ‰“å¼€ä»»æ„...
+ç®€ä¹¦ç¤¾åŒº
+î˜«
+ç™¾åº¦å¿«ç…§
+Ipynbæ–‡ä»¶çš„æ‰“å¼€ - äº‘+ç¤¾åŒº - è…¾è®¯äº‘
+2018å¹´1æœˆ2æ—¥ RT,ipynbæ–‡ä»¶ç”¨geditç›´æŽ¥æ‰“å¼€çš„è¯,å¤ªå¤šé™„åŠ ä¿¡æ¯,æ­¤æ—¶éœ€è¦åœ¨æµè§ˆå™¨ç«¯æ‰“å¼€ å‡çº§ipython å¤ªä½Žç‰ˆæœ¬çš„ipythonæ˜¯ä¸è¡Œçš„,å‡ºçŽ°çš„é”™è¯¯å¯èƒ½æ˜¯è¿™æ ·çš„: ...
+è…¾è®¯äº‘è®¡ç®—
+î˜«
+ç™¾åº¦å¿«ç…§
+æ‰“å¼€.ipynbæ–‡ä»¶(jupyter) - å¤åŸŽç‹¬é’“ - åšå®¢å›­
+2020å¹´8æœˆ29æ—¥ é¦–å…ˆè¦ç¡®ä¿ç”µè„‘ä¸Šå·²ç»å®‰è£…jupyter notebook ä½¿ç”¨win+Rè°ƒå‡ºè¿è¡Œ,åœ¨å…¶ä¸­è¾“å…¥cmdæ‰“å¼€å‘½ä»¤è¡Œ ç„¶åŽåœ¨å‘½ä»¤è¡Œä¸­è¾“å…¥jupyter notebook åœ¨å…¶åŽè·³å‡ºæ¥çš„ç½‘å€ä¸­é€‰...
+åšå®¢å›­
+î˜«
+ç™¾åº¦å¿«ç…§
+ipynb_ipynbç›¸å…³äº‘è®¡ç®—å†…å®¹ - UCloudäº‘ç¤¾åŒº
+UCloudä¸­ç«‹äº‘è®¡ç®—ä¸ºæ‚¨ä»‹ç»ipynb,UCloudäº‘ç¤¾åŒºä¸ºæ‚¨æä¾›ä¸Žipynbç›¸å…³çš„äº‘è®¡ç®—æ–‡ç« ã€‚
 www.ucloud.cn/yun/tag/ipynb/
-¤†
-°Ù¶È¿ìÕÕ
-Ïà¹ØËÑË÷
-ynblfj		ynbÅä·½		°²×¿ÊÖ»ú²é¿´ipynbÎÄ¼þ
-ä¯ÀÀÆ÷²é¿´ip		urlÎÄ¼þÔõÃ´±ä³Éipynb		mac´ò¿ªipynbÎÄ¼þ
-ÔõÃ´´´½¨ipynbÎÄ¼þ		pycharmÔËÐÐipynbÎÄ¼þ		ipynbÔõÃ´ÔËÐÐ
+î˜«
+ç™¾åº¦å¿«ç…§
+ç›¸å…³æœç´¢
+ynblfj		ynbé…æ–¹		å®‰å“æ‰‹æœºæŸ¥çœ‹ipynbæ–‡ä»¶
+æµè§ˆå™¨æŸ¥çœ‹ip		urlæ–‡ä»¶æ€Žä¹ˆå˜æˆipynb		macæ‰“å¼€ipynbæ–‡ä»¶
+æ€Žä¹ˆåˆ›å»ºipynbæ–‡ä»¶		pycharmè¿è¡Œipynbæ–‡ä»¶		ipynbæ€Žä¹ˆè¿è¡Œ
 1
 2
 3
@@ -91,5 +73,5 @@ ynblfj		ynbÅä·½		°²×¿ÊÖ»ú²é¿´ipynbÎÄ¼þ
 8
 9
 10
-ÏÂÒ»Ò³ >
-°ïÖú¾Ù±¨ÓÃ»§·´À¡
+ä¸‹ä¸€é¡µ >
+å¸®åŠ©ä¸¾æŠ¥ç”¨æˆ·åé¦ˆ

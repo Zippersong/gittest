@@ -1,0 +1,113 @@
+Sub GroupByCountInExcel() '在 Office 2021 及之后的版本中
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+    
+    Dim ws2 As Worksheet
+    Set ws2 = ThisWorkbook.Sheets("Sheet2")
+    
+    ' 在 Sheet1 的第一行中查找对应的列数
+    Dim searchValue As String
+    searchValue = ws2.Range("A1").Value
+    
+    Dim foundColumn As Long
+    foundColumn = 0
+    
+    For col = 1 To ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
+        If ws.Cells(1, col).Value = searchValue Then
+            foundColumn = col
+            Exit For
+        End If
+    Next col
+    
+    ' 统计Sheet1 的对应列数值分布
+    maxRow = ws.Columns(foundColumn).End(xlDown).row '获取目标列的下标
+    
+    Dim dataRange As Range
+    Set dataRange = ws.Range(ws.Cells(2, foundColumn), ws.Cells(maxRow, foundColumn)) ' cells（x,y）中的x是行数，y是列数，此处x是固定的
+    
+    Dim dict As Object
+    Set dict = CreateObject("Scripting.Dictionary")
+    
+    Dim cell As Range
+    For Each cell In dataRange
+        If dict.Exists(cell.Value) Then
+            dict(cell.Value) = dict(cell.Value) + 1
+        Else
+            dict(cell.Value) = 1
+        End If
+    Next cell
+    
+    ' 展示在sheet2的D跟E列
+    ws2.Cells(1, 4).Value = "" ' 统计字段名
+    ws2.Cells(1, 5).Value = searchValue
+    
+    ws2.Range(ws2.Cells(2, 4), ws2.Cells(10, 5)).ClearContents ' 因为不同字段的分类数量不一致，这里先清空输出区域的值
+    
+    Dim row As Long
+    row = 2
+    
+    For Each key In dict.Keys
+        If counter < 10 Then ' 利用计数器counter来强制执行10次，实际可以用来取所有维度的max值，实际输出还是受key的数量来决定
+            ws2.Cells(row, 4).Value = key ' 统计字段的实际归类
+            ws2.Cells(row, 5).Value = dict(key) ' 统计字段的实际归类对应取值
+            row = row + 1
+            counter = counter + 1
+        Else
+            Exit For
+        End If
+    Next key
+    
+    '''' 画饼图
+    Dim dataRange_bt As Range
+    Set dataRange_bt = ws2.Range(ws2.Cells(2, 4), ws2.Cells(10, 5)) ' 固定饼图数据源位置
+    
+    Dim lastRow As Long
+    Dim lastCol As Long
+    lastRow = dataRange_bt.End(xlDown).row ' 自动调节饼图的有效数据源行下标
+    lastCol = dataRange_bt.End(xlToRight).Column ' 自动调节饼图的有效数据源列右标
+    
+    Dim chartRange As Range
+    Set chartRange = ws2.Range(ws2.Cells(2, 4), ws2.Cells(lastRow, lastCol))
+    
+    ' 删除 J5 位置原有的饼图
+    On Error Resume Next
+    ws2.ChartObjects("MyPieChart").Delete
+    On Error GoTo 0
+    
+    ' 添加新的饼图
+    Dim chartObject As chartObject
+    Set chartObject = ws2.ChartObjects.Add(Left:=ws2.Cells(5, 10).Left, Width:=300, Top:=ws2.Cells(5, 10).Top, Height:=300)
+    chartObject.Name = "MyPieChart" ' 为新饼图命名
+    
+    With chartObject.chart
+        .ChartType = xlPie
+        .SetSourceData Source:=chartRange
+        .HasLegend = True
+        .FullSeriesCollection(1).Format.Fill.ForeColor.RGB = RGB(0, 191, 255) ' 天蓝
+        .FullSeriesCollection(1).Format.Line.ForeColor.RGB = RGB(0, 0, 0) ' 设置图例边框颜色
+        .FullSeriesCollection(1).Name = ws2.Cells(1, 5).Value ' 设置图例名称
+        
+        Dim pointCount As Long
+        pointCount = .FullSeriesCollection(1).Points.Count
+        
+        ' 设置前三个数据点颜色
+        For i = 1 To 3
+            Select Case i
+                Case 1 ' 天蓝
+                    .FullSeriesCollection(1).Points(i).Format.Fill.ForeColor.RGB = RGB(0, 191, 255)
+                Case 2 ' 草绿
+                    .FullSeriesCollection(1).Points(i).Format.Fill.ForeColor.RGB = RGB(0, 255, 0)
+                Case 3 ' 太阳黄
+                    .FullSeriesCollection(1).Points(i).Format.Fill.ForeColor.RGB = RGB(255, 255, 0)
+            End Select
+        Next i
+        
+        ' 设置剩余数据点颜色为白色
+        For i = 4 To pointCount
+            .FullSeriesCollection(1).Points(i).Format.Fill.ForeColor.RGB = RGB(255, 255, 255) ' 白色
+        Next i
+    End With
+End Sub
+
+
+

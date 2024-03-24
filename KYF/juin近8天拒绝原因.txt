@@ -1,0 +1,134 @@
+
+WITH RECURSIVE n AS (
+  SELECT 0 AS `digit`
+  UNION ALL
+  SELECT digit + 1 FROM `n` WHERE `digit` < (SELECT MAX(LENGTH(reason_code) - LENGTH(REPLACE(reason_code, ',', '')) ) AS comma_count
+  FROM risk_credit_result)
+),
+reject_reason as (
+SELECT 
+user_id,
+TRIM(TRIM(']' from TRIM('[' from  SUBSTRING_INDEX(SUBSTRING_INDEX(reason_code, ',', n.digit+1), ',', -1)))) as exploded_reason_code,
+date(create_time) as 拒绝日期,
+DATE_FORMAT(create_time, '%Y%m') AS 拒绝月份
+FROM risk_credit_result as a
+JOIN n
+ON CHAR_LENGTH(reason_code) - CHAR_LENGTH(REPLACE(reason_code, ',', '')) >= n.digit and a.credit_result="拒绝"
+ORDER BY user_id, n.digit
+),
+reject_name as (
+select a.*,
+b.规则大类,b.规则细类 from reject_reason as a
+left join juin_risk_operate.reject_code as b   on a.exploded_reason_code=b.规则码
+),
+reject_distinct_day as (
+select 拒绝日期,count(distinct user_id) as 拒绝量 from reject_name where 拒绝日期>=DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) group by 1
+),
+reject_distinct_day_level1 as (
+select 
+拒绝日期,
+规则大类,
+count(distinct user_id ) as 数量
+from reject_name  where 拒绝日期>=DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) group by 1,2
+),
+reject_distinct_day_level2 as (
+select 
+拒绝日期,
+规则细类,
+count(distinct user_id ) as 数量
+from reject_name  where 拒绝日期>=DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) group by 1,2
+),
+reject_base as (
+select a.规则大类 as 规则分类 from reject_distinct_day_level1 as a
+union 
+select b.规则细类 as 规则分类 from reject_distinct_day_level2 as b
+)
+select a.*,
+       t0.T日拒绝数量,t0.T日拒绝占比,
+			 t1.T_1日拒绝数量,t1.T_1日拒绝占比,
+		   t2.T_2日拒绝数量,t2.T_2日拒绝占比,
+			t3.T_3日拒绝数量,t3.T_3日拒绝占比,
+			t4.T_4日拒绝数量,t4.T_4日拒绝占比,
+			t5.T_5日拒绝数量,t5.T_5日拒绝占比,
+			t6.T_6日拒绝数量,t6.T_6日拒绝占比,
+			t7.T_7日拒绝数量,t7.T_7日拒绝占比	from 
+(
+(select 规则细类 as 规则分类,sum(数量) as 近8天拒绝数量,
+CONCAT(FORMAT(sum(数量) / (select sum(拒绝量) as 拒绝数量 from reject_distinct_day) * 100, 2), '%') as 近8天拒绝占比 from reject_distinct_day_level2 GROUP BY 1) 
+UNION ALL
+(select 规则大类 as 规则分类,sum(数量) as 近8天拒绝数量,
+CONCAT(FORMAT(sum(数量) / (select sum(拒绝量) as 拒绝数量 from reject_distinct_day) * 100, 2), '%') as 近8天拒绝占比 from reject_distinct_day_level1 GROUP BY 1) 
+) as a
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 0 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 0 DAY))
+) as t0 on a.规则分类=t0.规则分类
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T_1日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_1日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T_1日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_1日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY))
+) as t1 on a.规则分类=t1.规则分类
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T_2日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_2日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 2 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T_2日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_2日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 2 DAY))
+) as t2 on a.规则分类=t2.规则分类
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T_3日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_3日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T_3日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_3日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY))
+) as t3 on a.规则分类=t3.规则分类
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T_4日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_4日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T_4日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_4日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 4 DAY))
+) as t4 on a.规则分类=t4.规则分类
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T_5日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_5日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 5 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T_5日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_5日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 5 DAY))
+) as t5 on a.规则分类=t5.规则分类
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T_6日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_6日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 6 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T_6日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_6日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 6 DAY))
+) as t6 on a.规则分类=t6.规则分类
+
+left join 
+(
+(select a.规则细类 as 规则分类,a.数量 as T_7日拒绝数量, CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_7日拒绝占比 from reject_distinct_day_level2 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)) 
+UNION ALL
+(select a.规则大类 as 规则分类,a.数量 as T_7日拒绝数量,CONCAT(FORMAT(a.数量 / b.拒绝量 * 100, 2), '%') as T_7日拒绝占比  from reject_distinct_day_level1 as a
+ join reject_distinct_day as b on a.拒绝日期=b.拒绝日期 and a.拒绝日期=DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY))
+) as t7 on a.规则分类=t7.规则分类
+order by 1,2 desc

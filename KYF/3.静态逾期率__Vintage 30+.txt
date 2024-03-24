@@ -1,0 +1,101 @@
+with RECURSIVE n AS 
+(
+  SELECT 0 AS `sq`
+  UNION ALL
+  SELECT   sq+1   FROM `n` WHERE `sq`<(YEAR(curdate()) - 2023) * 12+ (MONTH(curdate()) - 11)
+)
+, 
+  date_base as 
+(
+SELECT sq,DATE_FORMAT(if(DATE_SUB(LAST_DAY(CURRENT_DATE), INTERVAL `sq` MONTH)>=CURDATE(),DATE_SUB(CURDATE(), INTERVAL 1 DAY),DATE_SUB(LAST_DAY(CURRENT_DATE), INTERVAL `sq` MONTH)), '%Y-%m-%d') AS `end_date`
+FROM n
+),
+  o as 
+(
+select id as order_id
+      ,user_id
+	    ,loan_amount
+	    ,period
+      ,loan_date
+from juin_loan_core_prd.order_record o    
+where pay_status=20
+)
+,
+ od_days_yihuan AS
+(
+select a.order_id
+      ,end_date
+      ,MAX( if( 
+-- 1、结清时间非空且小于等于截至日期
+date(settle_time)>0 and date(settle_time)<=end_date,0,DATEDIFF(end_date,repayment_date))) as od_day,
+sum(if(date(q.repayment_time)<=end_date , ifnull(q.principal_amount,0),0)) repayment_principal 
+from   o  as a
+left join juin_loan_core_prd.repayment_plan_period p  on p.order_id  = a.order_id 
+left join juin_loan_core_prd.repayment_trade_divide_accounts q on p.id=q.repayment_period_id
+inner join  date_base 
+group by  1 ,2
+order by 1 ,2
+),
+fk_month as 
+(
+select date_format(loan_date,'%Y-%m') 放款月份
+      ,sum(loan_amount) as 放款金额 
+	  ,count(*) as 放款件数
+from o 
+group by 放款月份
+order by 放款月份
+),
+big_table AS
+(
+select a.*
+	  ,b.repayment_principal
+	  , (YEAR(b.end_date) - YEAR(a.loan_date)) * 12+ (MONTH(b.end_date) - MONTH(a.loan_date))  AS sq
+	  ,b.end_date
+      ,b.od_day from o as a
+left join od_days_yihuan as b on a.order_id=b.order_id
+),
+fenzi30 as 
+(
+select date_format(loan_date,'%Y-%m') 放款月份
+       ,sum(if(sq=1 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))   `MOB1`
+       ,sum(if(sq=2 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null)) `MOB2`
+        ,sum(if(sq=3 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null)) `MOB3`
+--        ,sum(if(sq=4 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB4`
+--        ,sum(if(sq=5 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB5`
+--        ,sum(if(sq=6 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB6`
+--        ,sum(if(sq=7 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB7`
+--        ,sum(if(sq=8 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB8`
+--        ,sum(if(sq=9 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB9`
+--        ,sum(if(sq=10 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB10`
+--        ,sum(if(sq=11 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB11`
+--        ,sum(if(sq=12 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB12`
+--        ,sum(if(sq=13 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB13`
+--        ,sum(if(sq=14 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB14`
+--        ,sum(if(sq=15 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB15`
+--        ,sum(if(sq=16 and  od_day>=30 ,loan_amount - ifnull(repayment_principal,0) ,null))  `MOB16`
+from big_table 
+where last_day(adddate(loan_date,interval sq month))<=last_day(curDate()) or sq is null
+group by 放款月份 
+order by 放款月份 
+)
+select a.放款月份
+      ,a.放款金额
+			,CONCAT(FORMAT(b.MOB1 / a.放款金额 * 100, 2), '%') AS MOB1
+			,CONCAT(FORMAT(b.MOB2 / a.放款金额 * 100, 2), '%') AS MOB2
+			,CONCAT(FORMAT(b.MOB3 / a.放款金额 * 100, 2), '%') AS MOB3
+-- 			,CONCAT(FORMAT(b.MOB4 / a.放款金额 * 100, 2), '%') AS MOB4
+-- 			,CONCAT(FORMAT(b.MOB5 / a.放款金额 * 100, 2), '%') AS MOB5
+-- 			,CONCAT(FORMAT(b.MOB6 / a.放款金额 * 100, 2), '%') AS MOB6
+-- 			,CONCAT(FORMAT(b.MOB7 / a.放款金额 * 100, 2), '%') AS MOB7
+-- 			,CONCAT(FORMAT(b.MOB8 / a.放款金额 * 100, 2), '%') AS MOB8
+-- 			,CONCAT(FORMAT(b.MOB9 / a.放款金额 * 100, 2), '%') AS MOB9
+-- 			,CONCAT(FORMAT(b.MOB10 / a.放款金额 * 100, 2), '%') AS MOB10
+-- 			,CONCAT(FORMAT(b.MOB11 / a.放款金额 * 100, 2), '%') AS MOB11
+-- 			,CONCAT(FORMAT(b.MOB12 / a.放款金额 * 100, 2), '%') AS MOB12
+-- 			,CONCAT(FORMAT(b.MOB13 / a.放款金额 * 100, 2), '%') AS MOB13
+-- 			,CONCAT(FORMAT(b.MOB14 / a.放款金额 * 100, 2), '%') AS MOB14
+-- 			,CONCAT(FORMAT(b.MOB15 / a.放款金额 * 100, 2), '%') AS MOB15
+-- 			,CONCAT(FORMAT(b.MOB16 / a.放款金额 * 100, 2), '%') AS MOB16
+
+from fk_month as a
+left join  fenzi30 as b on a.放款月份=b.放款月份

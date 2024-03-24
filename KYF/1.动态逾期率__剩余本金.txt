@@ -1,0 +1,70 @@
+with RECURSIVE n AS 
+(
+  SELECT 0 AS `sq`
+  UNION ALL
+  SELECT   sq+1   FROM `n` WHERE `sq`<(YEAR(curdate()) - 2023) * 12+ (MONTH(curdate()) - 11)
+)
+, 
+  date_base as 
+(
+SELECT sq,DATE_FORMAT(if(DATE_SUB(LAST_DAY(CURRENT_DATE), INTERVAL `sq` MONTH)>=CURDATE(),DATE_SUB(CURDATE(), INTERVAL 1 DAY),DATE_SUB(LAST_DAY(CURRENT_DATE), INTERVAL `sq` MONTH)), '%Y-%m-%d') AS `end_date`
+FROM n
+),
+  o as 
+(
+select id as order_id
+      ,user_id
+	    ,loan_amount
+	    ,period
+      ,loan_date
+from juin_loan_core_prd.order_record o    
+where pay_status=20
+)
+,
+ od_days_yihuan AS
+(
+select a.order_id
+      ,end_date
+      ,MAX( if( 
+-- 1、结清时间非空且小于等于截至日期
+date(settle_time)>0 and date(settle_time)<=end_date,0,DATEDIFF(end_date,repayment_date))) as od_day,
+sum(if(date(q.repayment_time)<=end_date , ifnull(q.principal_amount,0),0)) repayment_principal 
+from   o  as a
+left join juin_loan_core_prd.repayment_plan_period p  on p.order_id  = a.order_id 
+left join juin_loan_core_prd.repayment_trade_divide_accounts q on p.id=q.repayment_period_id
+inner join  date_base 
+group by  1 ,2
+order by 1 ,2
+),
+fk_month as 
+(
+select date_format(loan_date,'%Y-%m') 放款月份
+      ,sum(loan_amount) as 放款金额 
+	  ,count(*) as 放款件数
+from o 
+group by 放款月份
+order by 放款月份
+),
+big_table AS
+(
+select a.*
+	  ,b.repayment_principal
+	  , (YEAR(b.end_date) - YEAR(a.loan_date)) * 12+ (MONTH(b.end_date) - MONTH(a.loan_date))  AS sq
+	  ,b.end_date
+      ,b.od_day from o as a
+left join od_days_yihuan as b on a.order_id=b.order_id
+)
+
+select end_date
+      ,sum(loan_amount - ifnull(repayment_principal,0)) as 剩余本金
+	  ,sum(case when od_day<=0 or od_day is null then loan_amount - ifnull(repayment_principal,0) else 0 end) as  C
+	  ,sum(case when  od_day<=30 and od_day>0 then loan_amount - ifnull(repayment_principal,0) else 0 end) as  M1
+	  ,sum(case when od_day<=60 and od_day>30 then loan_amount - ifnull(repayment_principal,0) else 0 end) as M2
+	  ,sum(case when  od_day<=90 and od_day>60 then loan_amount - ifnull(repayment_principal,0) else 0 end) as  M3
+	  ,sum(case when  od_day>90 then loan_amount - ifnull(repayment_principal,0) else 0 end) as  M3_PLUS
+	  ,CONCAT(FORMAT(sum(case when  od_day<=0 then loan_amount - ifnull(repayment_principal,0) else 0 end)/sum(loan_amount - ifnull(repayment_principal,0)) * 100, 2), '%') as    C_Rate
+	  ,CONCAT(FORMAT(sum(case when  od_day<=30 and od_day>0 then loan_amount - ifnull(repayment_principal,0) else 0 end)/sum(loan_amount - ifnull(repayment_principal,0)) * 100, 2), '%') as M1_Rate
+	  ,CONCAT(FORMAT(sum(case when  od_day<=60 and od_day>30 then loan_amount - ifnull(repayment_principal,0) else 0 end)/sum(loan_amount - ifnull(repayment_principal,0)) * 100, 2), '%') as M2_Rate
+	  ,CONCAT(FORMAT(sum(case when  od_day<=90 and od_day>60 then loan_amount - ifnull(repayment_principal,0) else 0 end)/sum(loan_amount - ifnull(repayment_principal,0)) * 100, 2), '%') as M3_Rate
+	  ,CONCAT(FORMAT(sum(case when od_day>90 then loan_amount - ifnull(repayment_principal,0) else 0 end)/sum(loan_amount - ifnull(repayment_principal,0)) * 100, 2), '%') as M3_PLUS_Rate
+from big_table where date(loan_date)<=end_date   group by end_date
